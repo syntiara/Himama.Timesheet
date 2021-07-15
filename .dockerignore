@@ -1,0 +1,14 @@
+**/.classpath
+**/.dockerignore
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/bin
+**/Dockerfile*
+**/obj
+LICENSE
+README.md
