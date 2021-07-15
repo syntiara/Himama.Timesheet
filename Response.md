@@ -22,4 +22,8 @@ During development, I noticed it required a page for every method call, and relo
 
 ### If I had more time, I would consider
 - adding an auth middleware to avoid attendance fraud
-- making mvc play nicely with javascript, espcially in terms of displaying errors to the user  
+- include column in table to calculate total number of hours worked
+- implement data filtering; get 24-hour, 7-day, 2-weeks, a month attendance record.
+- implement data pagination to avoid overloading the server
+- making mvc play nicely with javascript, espcially in terms of displaying errors to the user
+- build a reporting module for whoever needs to make sense of the data

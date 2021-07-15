@@ -15,7 +15,7 @@ Home Page                                             |  User Details Page
 - [Resources](#resources)
 
 ## Getting Started
-This is an mvc application built with [.Netcore MVC](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio). The database is [Postgres DB](https://www.heroku.com/postgres) and it's been deployed to [heroku](https://heroku.com/)
+This is an mvc application built with [.Netcore MVC](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio). The database is [Postgres DB](https://www.heroku.com/postgres) and it's been deployed to [heroku](https://himamatimesheet.herokuapp.com)
 
 
 
