@@ -13,5 +13,7 @@ namespace Himama.Timesheet.Services
         public Task<User> GetUser(int id);
 
         public Task<User> GetUserAttendance(int userId);
+
+        public Task<IList<User>> SearchUserByName(string name);
     }
 }

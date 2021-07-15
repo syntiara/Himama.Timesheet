@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Himama.Timesheet.Data;
 using Himama.Timesheet.Data.Entity;
+using Himama.Timesheet.Data.Models;
 using Himama.Timesheet.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Himama.Timesheet
 {
@@ -27,22 +25,34 @@ namespace Himama.Timesheet
             return View();
         }
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IList<User>> SearchUser(string name)
         {
-            if (id == null)
+            IList<User> users = new List<User>();
+            if (!String.IsNullOrEmpty(name))
             {
-                return NotFound();
+                users = await _service.SearchUserByName(name);
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            return users;
+        }
 
-            return View(user);
+        // GET: Users/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            try
+            {
+                var user = await _service.GetUserAttendance(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return View((UserDTO)user);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         // GET: Users/Create
@@ -51,105 +61,24 @@ namespace Himama.Timesheet
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email")] User user)
+        public async Task<IActionResult> Create([Bind] UserWDTO model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
-        }
-
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Email")] User user)
-        {
-            if (id != user.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(user);
+                    var entityEntry = _context.Users.Add(model);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { id = entityEntry.Entity });
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return View(model);
             }
-            return View(user);
-        }
-
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
+            catch (Exception)
             {
-                return NotFound();
+                return null;
             }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

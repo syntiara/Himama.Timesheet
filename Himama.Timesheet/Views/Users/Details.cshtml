@@ -1,36 +1,57 @@
-@model Himama.Timesheet.Data.Entity.User
+@model Himama.Timesheet.Data.Models.UserDTO
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "User Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>User</h4>
+<div class="user-details shadow p-5 bg-light border rounded">
+    <h1>Hello, @Html.DisplayFor(model => model.FirstName)</h1>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    </div>
+    <div class="clock row">
+        @{
+            bool isClockedIn = @Model.LastUserAttendance.IsClockedIn;
+        }
+        @{
+            bool isClockedOut = @Model.LastUserAttendance.IsClockedOut;
+        }
+
+        <div class="clock-in justiy-content-center align-items-center col-sm-3 btn btn-light text-success @((@isClockedOut || (!@isClockedIn &&
+        !@isClockedOut))?"d-block":"d-none")" onclick="ClockIn(@Model.Id, 'true')">
+            Clock In <span class="align-middle material-icons">restore</span>
+        </div>
+        <div class="clock-out justiy-content-center align-items-center col-sm-3 btn btn-light text-danger @((!@isClockedOut && @isClockedIn)?"d-block":"d-none")"
+            onclick="ClockIn(@Model.Id)">
+            Clock Out <span class="align-middle material-icons">update</span>
+        </div>
+    </div>
+    <br>
+    <div class="text-muted mt-3">
+        <p>Click the <a class="font-weight-bold-red" asp-controller="UsersAttendance" asp-action="Details"
+                asp-route-id="@Model.Id">link</a> to
+            view list of
+            your timesheets
+    </div>
 </div>

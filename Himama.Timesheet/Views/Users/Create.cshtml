@@ -1,43 +1,37 @@
-@model Himama.Timesheet.Data.Entity.User
+@model Himama.Timesheet.Data.Models.UserWDTO
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create User";
 }
 
-<h1>Create</h1>
-
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+<div class="text-center h-100 shadow p-5 bg-light border rounded signup-form">
+    <form asp-action="Create">
+        <p class="hint-text">Create your account.</p>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name"
+                        required="required">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <input type="text" asp-for="LastName" class="form-control" placeholder="Last Name"
+                        required="required">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+        <div class="form-group">
+            <input asp-for="Email" type="email" class="form-control" placeholder="Email" required="required">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" value="Create" class="btn btn-success btn-lg btn-block">Submit</button>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -38,5 +38,10 @@ namespace Himama.Timesheet.Services
         {
             return await _context.Users.Where(x => x.Id == userId).Include(x => x.UserAttendance).FirstOrDefaultAsync();
         }
+
+        public async Task<IList<User>> SearchUserByName(string name)
+        {
+            return await _context.Users.Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower())).ToListAsync();
+        }
     }
 }
