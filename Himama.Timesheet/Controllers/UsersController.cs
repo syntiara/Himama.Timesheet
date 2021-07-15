@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Himama.Timesheet.Controllers;
 using Himama.Timesheet.Data;
 using Himama.Timesheet.Data.Entity;
 using Himama.Timesheet.Data.Models;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Himama.Timesheet
 {
-    public class UsersController : Controller
+    public class UsersController : ErrorController
     {
         private readonly IUserAttendanceService _service;
         private readonly DBContext _context;
@@ -44,14 +45,14 @@ namespace Himama.Timesheet
                 var user = await _service.GetUserAttendance(id);
                 if (user == null)
                 {
-                    return NotFound();
+                    return ShowNotFound();
                 }
 
                 return View((UserDTO)user);
             }
             catch (Exception)
             {
-                return null;
+                return ShowServerError();
             }
         }
 
@@ -77,7 +78,7 @@ namespace Himama.Timesheet
             }
             catch (Exception)
             {
-                return null;
+                return ShowServerError();
             }
         }
     }

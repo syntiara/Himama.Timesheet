@@ -1,0 +1,21 @@
+﻿@model Himama.Timesheet.Data.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="shadow p-5 bg-light border rounded">
+    <h1 class="text-danger">Oops!</h1>
+    @if (@Model.StatusCode == 400)
+    {
+        <h1>404 Not Found</h1>
+        <h2 class="text-danger">@Model.ErrorMessage</h2>
+    }
+    else
+    {
+        <h2 class="text-danger">@Model.ErrorMessage</h2>
+    }
+    <div class="mt-4">
+        Let's Retrace the step....
+        <a asp-action="Index" asp-controller="Users">Go Home</a>
+    </div>
+</div>
