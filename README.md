@@ -2,9 +2,9 @@
 
 This application is used to track time by a user. Features include allows new user creation, clock-in/out, display of attendance entries, and the ability to update entries. [You can read all about the thought process here](./Response.md)
 
-Solarized dark             |  Solarized Ocean
-:-------------------------:|:-------------------------:
-![](<img width="700" alt="Server Side" src="./index.png">)  |  ![](<img width="700" alt="Server Side" src="./details.png">)
+Home Page                                             |  User Details Page
+:----------------------------------------------------:|:------------------------------------------------------:
+<img width="700" alt="Server Side" src="./index.png"> |  <img width="700" alt="Server Side" src="./details.png">
 
 
 # Table of Contents
