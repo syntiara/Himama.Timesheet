@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Himama.Timesheet.Data;
+﻿using Himama.Timesheet.Data;
 using Himama.Timesheet.Extensions;
+using Himama.Timesheet.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +26,9 @@ namespace Himama.Timesheet
 
             services.AddDbContext<DBContext>(options =>
                options.UseNpgsql(connString));
+
             services.AddControllersWithViews();
+            services.AddScoped<IUserAttendanceService, UserAttendanceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +55,7 @@ namespace Himama.Timesheet
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Users}/{action=Index}/{id?}");
             });
         }
     }
