@@ -88,3 +88,32 @@ body {
   top: 8px;
   left: 10px;
 }
+
+/* User Details
+-------------------------------------------------- */
+.user-details .clock span {
+  font-size: 2rem;
+}
+
+.clock .btn:hover{
+  cursor: pointer;
+}
+
+.status
+{
+  vertical-align: middle;
+  line-height: 1.8rem;
+  font-size: 1.7rem;
+}
+
+.clock-page
+{
+  font-size: 1.2rem;
+  line-height: 3rem;
+}
+
+#tblAttendance .no-border
+{
+  border: 0;
+  background: transparent
+}

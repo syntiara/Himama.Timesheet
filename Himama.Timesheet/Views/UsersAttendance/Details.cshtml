@@ -1,0 +1,80 @@
+@model IEnumerable<Himama.Timesheet.Data.Models.AttendanceDTO>
+
+@{
+    ViewData["Title"] = "Attendance Details";
+}
+
+<div class="shadow p-5 bg-light border rounded">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h3>User Attendance</h3>
+                    </div>
+                    <div class="col-sm-5">
+                        <a class="clock-page" asp-action="Details" asp-controller="Users"
+                            asp-route-id="@Model.First().UserId">Back to
+                            Clock In Page</a>
+                    </div>
+                </div>
+            </div>
+            <table id="tblAttendance" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Clock-In Time
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Clock-Out Time
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="num">
+                                <span class="id d-none">@Html.DisplayFor(model => @item.Id)</span>
+                                <span class="userid d-none">@Html.DisplayFor(model => @item.UserId)</span>
+                                @(i++)
+                            </td>
+                            <td class="clock-in">
+                                <input class="no-border" type="text" value="@Html.DisplayFor(model => item.ClockIn)"
+                                readonly />
+                            </td>
+                            <td><span
+                                class="status material-icon @(item.IsClockedIn ? "text-success" : "text-danger")">&bull;</span>
+                            </td>
+                            <td class="clock-out">
+                                <input class="no-border" type="text" value="@Html.DisplayFor(model => item.ClockOut)" />
+                            </td>
+
+                            <td>
+                                <span
+                                class="status material-icon @(item.IsClockedOut ? "text-success" : "text-danger")">&bull;</span>
+                            </td>
+                            <td>
+                                <a class="Edit" href="javascript:;">Edit</a>
+                                <a class="Update" href="javascript:;" style="display:none">Update</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="error text-center text-danger d-none">Valid date string is required</div>
+    </div>
