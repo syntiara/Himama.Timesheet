@@ -72,7 +72,7 @@ namespace Himama.Timesheet
                 {
                     var entityEntry = _context.Users.Add(model);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { id = entityEntry.Entity });
+                    return RedirectToAction(nameof(Details), new { id = entityEntry.Entity.Id });
                 }
                 return View(model);
             }
