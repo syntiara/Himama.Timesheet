@@ -38,7 +38,7 @@
             bool isClockedOut = @Model.LastUserAttendance.IsClockedOut;
         }
 
-        <div class="clock-in justiy-content-center align-items-center col-sm-3 btn btn-light text-success @((@isClockedOut || (!@isClockedIn &&
+        <div class="clock-in justify-content-center align-items-center col-sm-3 btn btn-light text-success @((@isClockedOut || (!@isClockedIn &&
         !@isClockedOut))?"d-block":"d-none")" onclick="ClockIn(@Model.Id, 'true')">
             Clock In <span class="align-middle material-icons">restore</span>
         </div>

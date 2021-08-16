@@ -56,8 +56,10 @@
                                 <input class="no-border" type="text" value="@Html.DisplayFor(model => item.ClockIn)"
                                 readonly />
                             </td>
-                            <td><span
-                                class="status material-icon @(item.IsClockedIn ? "text-success" : "text-danger")">&bull;</span>
+                            <td>
+                                <span
+                                class="status material-icon @(item.IsClockedIn ? "text-success" : "text-danger")">&bull;
+                                </span>
                             </td>
                             <td class="clock-out">
                                 <input class="no-border" type="text" value="@Html.DisplayFor(model => item.ClockOut)" />
@@ -65,11 +67,12 @@
 
                             <td>
                                 <span
-                                class="status material-icon @(item.IsClockedOut ? "text-success" : "text-danger")">&bull;</span>
+                                class="status material-icon @(item.IsClockedOut ? "text-success" : "text-danger")">&bull;
+                                </span>
                             </td>
                             <td>
-                                <a class="Edit" href="javascript:;">Edit</a>
-                                <a class="Update" href="javascript:;" style="display:none">Update</a>
+                                <a class="Edit" onclick="Edit(this)" href="javascript:;">Edit</a>
+                                <a class="Update" onclick="Update(this)" style="display:none" href="javascript:;">Update</a>
                             </td>
                         </tr>
                     }
